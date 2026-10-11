@@ -821,9 +821,23 @@ service cloud.firestore {
 
 > ✅ **Checkpoint 8.1** ถ่ายภาพหน้าจอผลการทดสอบทั้ง 4 ข้อ 
 
-```text
-บันทึกรูปผลลัพธ์ที่นี่ 
-```
+## 1
+<img width="391" height="761" alt="ภาพถ่ายหน้าจอ 2569-10-12 เวลา 03 01 39" src="https://github.com/user-attachments/assets/8ef2a522-dc97-4491-80d3-a28ed6afb926" />
+
+<img width="391" height="761" alt="ภาพถ่ายหน้าจอ 2569-10-12 เวลา 03 01 57" src="https://github.com/user-attachments/assets/67748b4d-8e8c-49d7-a90a-17372872bf8d" />
+
+## 2
+<img width="391" height="761" alt="ภาพถ่ายหน้าจอ 2569-10-12 เวลา 03 02 28" src="https://github.com/user-attachments/assets/a37e38ed-c582-4894-a54d-2040d3db7e2d" />
+
+<img width="391" height="761" alt="ภาพถ่ายหน้าจอ 2569-10-12 เวลา 03 02 51" src="https://github.com/user-attachments/assets/d1274388-2c21-4cc2-8bdc-77cd7af9c682" />
+
+## 3
+<img width="391" height="761" alt="ภาพถ่ายหน้าจอ 2569-10-12 เวลา 03 03 06" src="https://github.com/user-attachments/assets/dc757e31-337b-4840-a0b4-a5a5a0e37dd3" />
+
+## 4
+<img width="391" height="761" alt="ภาพถ่ายหน้าจอ 2569-10-12 เวลา 03 05 53" src="https://github.com/user-attachments/assets/2db4d2c9-a62d-481e-8744-5b5260ef8a93" />
+
+<img width="391" height="761" alt="ภาพถ่ายหน้าจอ 2569-10-12 เวลา 03 05 57" src="https://github.com/user-attachments/assets/b14bbd60-327b-4526-9576-9d85b1ec16be" />
 
 ---
 
