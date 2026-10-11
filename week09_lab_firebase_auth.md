@@ -797,8 +797,13 @@ service cloud.firestore {
 
 > ✅ **Checkpoint 7.1 (Self-Study)** ถ่ายภาพหน้าจอผลการทดลองทั้ง 2 กรณีใน Rules Playground เขียนอธิบายสั้น ๆ ว่าทำไม Client-side Validation (การไม่แสดงปุ่มแก้ไขให้เห็น) เพียงอย่างเดียวจึงไม่เพียงพอต่อความปลอดภัยของข้อมูลจริง
 
+<img width="1126" height="721" alt="checkpoint-7 1-case-a-allowed" src="https://github.com/user-attachments/assets/4c030d34-8c62-491b-8c42-1318a3e6313a" />
+
+<img width="1126" height="721" alt="checkpoint-7 1-case-b-denied" src="https://github.com/user-attachments/assets/ac3c415c-d20a-4775-8f1f-774bc24e9635" />
+
 ```text
-บันทึกรูปผลลัพธ์ที่นี่ และคำอธิบาย
+- Client-side Validation แค่ซ่อนปุ่มในแอปของเรา ซึ่งป้องกันได้เฉพาะคนที่ใช้งานผ่านหน้าจอแอปเท่านั้น แต่ผู้ไม่หวังดีไม่ต้องผ่านแอป เขาเขียนโค้ดเรียก Firestore ตรงๆ หรือยิงผ่าน REST API ด้วย API key ที่อยู่ในแอปได้เลย ก็แก้หรือลบประกาศของคนอื่นได้ทันที ถ้าฝั่งเซิร์ฟเวอร์ไม่ตรวจอะไร
+- Security Rules ทำงานที่ฝั่ง Firebase เองกับทุกคำขอ ตรวจว่า request.auth.uid ตรงกับ sellerId ของเอกสารหรือไม่ ถ้าไม่ตรงก็ปฏิเสธ ไม่ว่าคำขอนั้นจะมาจากแอปหรือจากที่อื่น จึงป้องกันได้จริง ซึ่งเห็นได้จากผลทดสอบใน Rules Playground ที่ uid เจ้าของผ่าน แต่ uid อื่นถูกปฏิเสธ
 ```
 
 ---
