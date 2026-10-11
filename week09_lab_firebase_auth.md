@@ -410,10 +410,17 @@ avdmanager list avd
 
 <img width="465" height="925" alt="ภาพถ่ายหน้าจอ 2569-10-12 เวลา 00 43 13" src="https://github.com/user-attachments/assets/b3326483-c76c-4cab-8cbd-abb794aa3fdb" />
 
+
 <img width="465" height="925" alt="ภาพถ่ายหน้าจอ 2569-10-12 เวลา 00 43 50" src="https://github.com/user-attachments/assets/0c13c7da-59dc-45b5-9760-24f595b41106" />
+
 
 <img width="1558" height="900" alt="ภาพถ่ายหน้าจอ 2569-10-12 เวลา 00 43 28" src="https://github.com/user-attachments/assets/77bf50f5-920a-42d8-86c3-147e4fa65120" />
 
+```
+- idToken คือ JWT ที่ Google ออกให้เพื่อยืนยันว่าผู้ใช้คือใคร Firebase Auth ใช้ตรวจสอบตัวตนของผู้ใช้ฝั่งเซิร์ฟเวอร์
+- accessToken คือโทเคนสำหรับเรียก Google API ในนามผู้ใช้ตาม scope ที่ขอ 
+ทั้งสองถูกห่อเป็น GoogleAuthProvider.credential(idToken, accessToken) แล้วส่งให้ FirebaseAuth.signInWithCredential() เพื่อแลกเป็นบัญชีผู้ใช้ของ Firebaseและเริ่ม session ของแอป
+```
 ---
 
 ## ส่วนที่ 4: AuthGate — สลับหน้าจอตามสถานะผู้ใช้
