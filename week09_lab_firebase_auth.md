@@ -168,8 +168,9 @@ Future<void> main() async {
 
 ## (ก) สมัครซ้ำด้วย Email เดิม
 <img width="988" height="912" alt="ภาพถ่ายหน้าจอ 2569-10-11 เวลา 23 04 55" src="https://github.com/user-attachments/assets/5f958dc6-f8ad-4026-902f-5db300de2cc1" />
+
 ```
- - Firebase โยน FirebaseAuthException ที่มี code = 'email-already-in-use'
+ - Firebase ส่ง FirebaseAuthException ที่มี code = 'email-already-in-use'
  - ส่วนของโค้ดที่จัดการคือ
    1) บล็อก try/catch ในเมธอด signUp() ของ auth_service.dart
       ที่ดักจับเฉพาะ `on FirebaseAuthException catch (e)`
@@ -185,7 +186,7 @@ Future<void> main() async {
 <img width="988" height="912" alt="ภาพถ่ายหน้าจอ 2569-10-11 เวลา 23 05 30" src="https://github.com/user-attachments/assets/3db8f87e-1fb2-4fff-a257-bcbe443c2723" />
 
 ```
- - Firebase โยน FirebaseAuthException ที่มี code = 'weak-password'
+ - Firebase ส่ง FirebaseAuthException ที่มี code = 'weak-password'
  - ถูกจัดการโดย try/catch ในเมธอด signUp() เช่นเดียวกัน
    แต่ _translateErrorCode() ไปเข้า case 'weak-password'
    ซึ่ง return 'รหัสผ่านสั้นหรือคาดเดาง่ายเกินไป (ต้องมีอย่างน้อย 6 ตัวอักษร)'
