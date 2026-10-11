@@ -579,10 +579,14 @@ StreamBuilder ฟัง FirebaseAuth.instance.authStateChanges() ซึ่งเ
 ก่อนเขียนโค้ด ให้ตอบคำถามต่อไปนี้ (อ้างอิง `campus_marketplace_lab_roadmap.md` ข้อ 5.6 และเนื้อหาหัวข้อ 9.5):
 
 1. ทำไมเราจึง "เพิ่ม Implementation ใหม่" (`ItemRepositoryFirestore`) แทนที่จะแก้ไข `ItemRepositoryApi` เดิม หรือเขียนโค้ดเรียก Firestore ตรงจาก `HomePage`?
-2. ถ้าในอนาคตอาจารย์สั่งให้เปลี่ยนจาก Fake Store API ไปใช้ API อื่น ต้องแก้ไฟล์กี่ไฟล์ ถ้าทุก Widget เรียกผ่าน Interface `ItemRepository` เท่านั้น?
-
 ```text
-บันทึกคำตอบของคุณที่นี่
+ไม่แก้ไข `ItemRepositoryApi` เดิม เพราะของเดิมมันทำงานได้ดีอยู่แล้ว ถ้าไปแก้อาจทำพังโดยไม่ตั้งใจ แถมคลาสเดียวจะต้องดูแลสองแหล่งข้อมูลปนกัน ซึ่งชื่อคลาสก็จะสื่อผิดไปด้วย
+ไม่เขียนโค้ดเรียก Firestore ตรงจาก `HomePage` เพราะหน้าจอจะผูกติดกับ Firebase ไปเลย เปลี่ยนแหล่งข้อมูลก็ยาก เอาข้อมูลปลอมมาทดสอบก็ไม่ได้ และถ้าหลายหน้าต้องใช้ข้อมูลชุดเดียวกันก็ต้องเขียนซ้ำทุกหน้า
+```
+
+2. ถ้าในอนาคตอาจารย์สั่งให้เปลี่ยนจาก Fake Store API ไปใช้ API อื่น ต้องแก้ไฟล์กี่ไฟล์ ถ้าทุก Widget เรียกผ่าน Interface `ItemRepository` เท่านั้น?
+```text
+ ถ้าเปลี่ยนจาก Fake Store API ไปใช้ API อื่น ต้องแก้แค่ 1 ไฟล์ คือไฟล์ item_repository_api.dart เพราะทุก Widget เรียกผ่าน Interface ItemRepository ไม่ต้องแตะ HomePage หรือหน้าอื่นเลย ถ้าสร้างคลาสใหม่แทนการแก้ไฟล์เดิม ก็เพิ่มอีกแค่บรรทัดเดียวใน main.dart ตรงที่สร้างอ็อบเจกต์
 ```
 
 ### ขั้นตอนที่ 5.2: **นักศึกษาเขียน Code เอง** — ItemRepositoryFirestore
