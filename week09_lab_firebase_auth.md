@@ -557,8 +557,17 @@ Widget build(BuildContext context) {
 > ✅ **Checkpoint 4.1** ถ่ายภาพหน้าจอ 3 ภาพเรียงกัน คือ (ก) แอปตอนเพิ่งเปิดขึ้นมาครั้งแรกแบบยังไม่ล็อกอิน แสดงหน้า Login (ข) หลังล็อกอินสำเร็จ แอปสลับไปแสดง `MainScaffold` อัตโนมัติโดยไม่ต้องกดอะไรเพิ่ม และ (ค) หลังกด "ออกจากระบบ" แอปสลับกลับไปหน้า Login เอง อธิบายว่าทำไมการใช้ `StreamBuilder` ฟัง `authStateChanges()` จึงทำให้ไม่ต้องเขียนโค้ดสั่ง Navigate ไปมาเอง
 
 
-```text
-บันทึกรูปผลลัพธ์ที่นี่ (3 ภาพ) และคำอธิบาย
+## ก
+<img width="465" height="925" alt="ภาพถ่ายหน้าจอ 2569-10-12 เวลา 01 05 02" src="https://github.com/user-attachments/assets/beb26eac-6b85-4483-b97b-5a13b065b31e" />
+
+## ข
+<img width="465" height="925" alt="ภาพถ่ายหน้าจอ 2569-10-12 เวลา 01 05 27" src="https://github.com/user-attachments/assets/cdcb0faf-b31e-49c5-ab74-3f7676d8d7db" />
+
+## ค
+<img width="465" height="925" alt="ภาพถ่ายหน้าจอ 2569-10-12 เวลา 01 05 33" src="https://github.com/user-attachments/assets/ac81dd80-27d2-4117-a09f-65fdd3618792" />
+
+```
+StreamBuilder ฟัง FirebaseAuth.instance.authStateChanges() ซึ่งเป็น Stream ที่ยิงค่าใหม่ทุกครั้งที่สถานะล็อกอินเปลี่ยน (ล็อกอิน, สมัครสมาชิก, ออกจากระบบ) และ builderถูกเรียกใหม่ทุกครั้งที่ได้ค่า ถ้าค่าเป็น null แสดง LoginPage ถ้าเป็น User แสดงMainScaffold ดังนั้น LoginPage และปุ่มออกจากระบบจึงทำแค่เปลี่ยนสถานะผ่าน AuthServiceโดยไม่ต้องรู้ว่าหน้าจอถัดไปคืออะไร ไม่ต้องเขียน Navigator.push/pop เองลดโอกาสผิดพลาด เช่น ผู้ใช้กดย้อนกลับกลับไปหน้าล็อกอินทั้งที่ล็อกอินอยู่และสถานะล็อกอินที่ Firebase จำไว้ก็ถูกสะท้อนบนหน้าจอัตโนมัติตอนเปิดแอปใหม่
 ```
 
 ---
