@@ -728,10 +728,46 @@ final pages = [
 
 > ✅ **Checkpoint 6.2** ถ่ายภาพหน้าจอ Firebase Console เมนู Storage ที่แสดงไฟล์รูปภาพที่อัปโหลดสำเร็จ และภาพหน้าจอ Firestore ที่แสดงว่าเอกสารมี field `imageUrl` เป็น URL จริงที่เปิดดูได้ ถ่ายภาพหน้าจอแอปที่แสดงรูปสินค้านั้นบนหน้า Home ผ่าน `Image.network(imageUrl)` ด้วย (ย้อนกลับไปถ่ายภาพ Checkpoint 5.1 ให้ครบตอนนี้ ถ้ายังไม่ได้ทำ)
 
-```text
-บันทึกรูปผลลัพธ์ที่นี่
-```
+<img width="391" height="761" alt="ภาพถ่ายหน้าจอ 2569-10-12 เวลา 02 29 59" src="https://github.com/user-attachments/assets/20fe36e8-1b62-4528-b280-58f3f1acd244" />
 
+<img width="1624" height="962" alt="ภาพถ่ายหน้าจอ 2569-10-12 เวลา 02 30 49" src="https://github.com/user-attachments/assets/10b1897a-58bc-4d8e-97f2-107333ad7433" />
+
+<img width="1624" height="962" alt="ภาพถ่ายหน้าจอ 2569-10-12 เวลา 02 30 55" src="https://github.com/user-attachments/assets/9a4bf552-aaaa-4859-b939-a97c9c251e95" />
+
+## คำอธิบาย Checkpoint 6.2 เรื่องการเก็บรูปภาพ
+```
+สาเหตุที่ไม่ได้ใช้ Firebase Storage
+เมื่อเข้าเมนู Storage ใน Firebase Console ระบบแจ้งว่า Storage requires a billing
+account (Blaze) คือต้องอัปเกรดโปรเจกต์จากแผน Spark ซึ่งฟรีเป็นแผน Blaze และผูกบัญชีชำระเงินก่อนจึงจะสร้าง bucket ได้ จึงไม่สามารถอัปโหลดไฟล์ขึ้น Storage
+ตามที่ใบงานกำหนดได้ในโปรเจกต์นี้ ซึ่งยืนยันได้จากการลอง deploy storage rules ผ่าน
+Firebase CLI แล้วได้ข้อความว่า Firebase Storage has not been set up on project
+
+วิธีแก้ที่เลือกใช้
+เปลี่ยนไปเก็บรูปภาพในเอกสาร Firestore โดยตรง ซึ่งใช้งานได้บนแผน Spark ฟรี โดยทำดังนี้
+1. เมธอด uploadListingImage ใน StorageService ยังรับ File กับ sellerId และคืนค่าเป็น
+   String ที่ใช้เป็น imageUrl เหมือนเดิม ทำให้ MyDraftsPage ไม่ต้องแก้
+2. ภายในเมธอดย่อรูปภาพ โดยจำกัดด้านยาวไม่เกิน 800 พิกเซล แล้วบีบอัดเป็น JPEG
+   จนขนาดไม่เกินประมาณ 600 KB เพราะเอกสาร Firestore มีขนาดสูงสุด 1 MB
+3. แปลงรูปเป็น base64 แล้วเก็บเป็น Data URI รูปแบบ data:image/jpeg;base64,...
+   ลงใน field imageUrl ของเอกสารในคอลเลกชัน items
+4. สร้าง widget ItemImage ให้แสดงรูปได้ทั้ง URL ปกติของสินค้าจาก API และ Data URI
+   ของประกาศที่นักศึกษาโพสต์
+
+ลำดับการทำงานยังคงตามใบงาน คือประมวลผลรูปให้ได้ค่า imageUrl ก่อน แล้วจึงเขียนเอกสาร
+ลง Firestore พร้อม imageUrl นั้น หลังโพสต์สำเร็จจึงลบร่างออกจาก Local Database
+
+หลักฐานที่ใช้แทนภาพหน้า Storage
+- ภาพหน้า Firestore Database แสดงเอกสารใน items ที่มี field imageUrl ขึ้นต้นด้วย
+  data:image/jpeg;base64 และ field sellerId ตรงกับ uid ของบัญชีที่ทดสอบ
+- ภาพหน้า Home ของแอป ที่แสดงรูปสินค้านั้นผ่าน ItemImage
+
+ข้อจำกัดของวิธีนี้
+- รูปแต่ละรูปต้องเล็กกว่าเพดาน 1 MB ต่อเอกสาร จึงต้องย่อรูปและคุณภาพลดลงเล็กน้อย
+- การโหลดรายการจะส่งข้อมูลรูปมาพร้อมเอกสารทุกครั้ง ใช้แบนด์วิดท์มากกว่าการใช้
+  URL จาก Storage
+- ถ้าต้องใช้งานจริงในอนาคต ควรอัปเกรดเป็นแผน Blaze แล้วเปลี่ยนไปใช้ Firebase Storage
+  ซึ่งทำได้โดยแก้เฉพาะ StorageService เพราะส่วนอื่นเรียกผ่านเมธอดเดียวกัน
+```
 ---
 
 ## ส่วนที่ 7 (Self-Study): สำรวจ Firebase Security Rules
