@@ -163,8 +163,33 @@ Future<void> main() async {
 
 > ✅ **Checkpoint 2.1** ทดสอบสมัครสมาชิกด้วย Email ใหม่สำเร็จ ถ่ายภาพหน้าจอ Firebase Console เมนู Authentication → Users ที่แสดงบัญชีที่เพิ่งสมัคร จากนั้นทดสอบกรณีผิดพลาด 2 กรณี คือ (ก) สมัครซ้ำด้วย Email เดิม และ (ข) ใส่รหัสผ่านสั้นเกินไป ถ่ายภาพหน้าจอข้อความ Error ทั้งสองกรณี พร้อมอธิบายว่าโค้ดส่วนใดใน `auth_service.dart` เป็นตัวจัดการแต่ละกรณี
 
-```text
-บันทึกรูปผลลัพธ์ที่นี่ และคำอธิบายของแต่ละกรณี
+## ทดสอบสมัครสมาชิกด้วย Email
+<img width="1624" height="966" alt="ภาพถ่ายหน้าจอ 2569-10-11 เวลา 22 19 31" src="https://github.com/user-attachments/assets/0cc5a629-ac06-4145-bde6-6e5c48669e69" />
+
+## (ก) สมัครซ้ำด้วย Email เดิม
+<img width="988" height="912" alt="ภาพถ่ายหน้าจอ 2569-10-11 เวลา 23 04 55" src="https://github.com/user-attachments/assets/5f958dc6-f8ad-4026-902f-5db300de2cc1" />
+```
+ - Firebase โยน FirebaseAuthException ที่มี code = 'email-already-in-use'
+ - ส่วนของโค้ดที่จัดการคือ
+   1) บล็อก try/catch ในเมธอด signUp() ของ auth_service.dart
+      ที่ดักจับเฉพาะ `on FirebaseAuthException catch (e)`
+      แล้วส่ง e.code ไปให้ _translateErrorCode()
+   2) เมธอด _translateErrorCode() ใน case 'email-already-in-use'
+      ซึ่ง return 'อีเมลนี้ถูกใช้สมัครสมาชิกไปแล้ว'
+ - signUp() โยน Exception ด้วยข้อความภาษาไทยนี้ออกไป
+   LoginPage จับด้วย catch ตัดคำว่า "Exception: " ออก
+   แล้วแสดงเป็นข้อความสีแดงบนหน้าจอ
+```
+
+## (ข) ใส่รหัสผ่านสั้นเกินไป
+<img width="988" height="912" alt="ภาพถ่ายหน้าจอ 2569-10-11 เวลา 23 05 30" src="https://github.com/user-attachments/assets/3db8f87e-1fb2-4fff-a257-bcbe443c2723" />
+
+```
+ - Firebase โยน FirebaseAuthException ที่มี code = 'weak-password'
+ - ถูกจัดการโดย try/catch ในเมธอด signUp() เช่นเดียวกัน
+   แต่ _translateErrorCode() ไปเข้า case 'weak-password'
+   ซึ่ง return 'รหัสผ่านสั้นหรือคาดเดาง่ายเกินไป (ต้องมีอย่างน้อย 6 ตัวอักษร)'
+ - LoginPage แสดงข้อความ รหัสคาดเดาง่าย
 ```
 
 ---
