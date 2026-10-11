@@ -717,9 +717,14 @@ final pages = [
 
 > ✅ **Checkpoint 6.1** โพสต์ขายจริงอย่างน้อย 2 รายการผ่านแอป ถ่ายภาพหน้าจอ Firebase Console เมนู Firestore Database ที่แสดง Collection `items` มีเอกสารที่โพสต์เข้ามาจริง พร้อม field `sellerId` ที่ตรงกับ `uid` ของบัญชีที่ใช้ทดสอบ และยืนยันว่าร่างทั้งสองรายการหายไปจาก `MyDraftsPage` แล้ว
 
-```text
-บันทึกรูปผลลัพธ์ที่นี่
-```
+<img width="391" height="761" alt="ภาพถ่ายหน้าจอ 2569-10-12 เวลา 02 16 01" src="https://github.com/user-attachments/assets/3ba0d42c-0a38-476f-b3d0-833c9b090b23" />
+
+<img width="391" height="761" alt="ภาพถ่ายหน้าจอ 2569-10-12 เวลา 02 20 20" src="https://github.com/user-attachments/assets/1dff521b-7d89-47b5-a7d8-5b92a2ec464d" />
+
+<img width="1624" height="962" alt="ภาพถ่ายหน้าจอ 2569-10-12 เวลา 02 20 48" src="https://github.com/user-attachments/assets/9d3e321f-33ea-4d05-8e7d-5f5191ba5c67" />
+
+<img width="1624" height="962" alt="ภาพถ่ายหน้าจอ 2569-10-12 เวลา 02 21 06" src="https://github.com/user-attachments/assets/1ecf1dd2-52cf-4897-bd79-6897b9236adc" />
+
 
 > ✅ **Checkpoint 6.2** ถ่ายภาพหน้าจอ Firebase Console เมนู Storage ที่แสดงไฟล์รูปภาพที่อัปโหลดสำเร็จ และภาพหน้าจอ Firestore ที่แสดงว่าเอกสารมี field `imageUrl` เป็น URL จริงที่เปิดดูได้ ถ่ายภาพหน้าจอแอปที่แสดงรูปสินค้านั้นบนหน้า Home ผ่าน `Image.network(imageUrl)` ด้วย (ย้อนกลับไปถ่ายภาพ Checkpoint 5.1 ให้ครบตอนนี้ ถ้ายังไม่ได้ทำ)
 
